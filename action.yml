@@ -1,12 +1,11 @@
-name: github-actions-composite-template
-description: GitHub Actions Composite Template
+name: setup-openapi
+description: Set up GitHub Actions workflow with OpenAPI Generator
 author: remarkablemark
 
 inputs:
   version:
-    description: Version
+    description: OpenAPI Generator version
     required: false
-    default: 1.2.3
 
 runs:
   using: composite
@@ -19,5 +18,5 @@ runs:
         VERSION: ${{ inputs.version }}
 
 branding:
-  icon: activity
-  color: white
+  icon: check-circle
+  color: green
