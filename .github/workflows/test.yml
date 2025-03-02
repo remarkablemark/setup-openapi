@@ -15,10 +15,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Java
+        if: matrix.os == 'windows-latest'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
       - name: Run action
         uses: ./
+
+      - name: Get version
+        run: openapi-generator-cli version
 
       - name: Run action with version
         uses: ./
         with:
-          version: 2.3.4
+          version: 7.9.0
+
+      - name: Check version
+        shell: bash
+        run: |
+          if [[ $(openapi-generator-cli version) != '7.9.0' ]]; then
+            echo 'Version does not match. See version below:'
+            openapi-generator-cli --version
+            exit 1
+          fi

@@ -10,10 +10,14 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Print version
-      shell: bash
-      run: |
-        echo "version: $VERSION"
+    - name: Install OpenAPI Generator CLI
+      shell: sh
+      run: npm install --global @openapitools/openapi-generator-cli
+
+    - name: Set OpenAPI Generator Version
+      if: inputs.version
+      shell: sh
+      run: openapi-generator-cli version-manager set $VERSION
       env:
         VERSION: ${{ inputs.version }}
 

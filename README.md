@@ -18,7 +18,7 @@ jobs:
       - name: Setup OpenAPI
         uses: remarkablemark/setup-openapi@v1
 
-      - name: Generate Ruby client from spec
+      - name: Generate Ruby Client
         run: openapi-generator-cli generate -i petstore.yaml -g ruby -o /tmp/test/
 ```
 
@@ -28,6 +28,12 @@ Install OpenAPI Generator CLI tool:
 
 ```yaml
 - uses: remarkablemark/setup-openapi@v1
+```
+
+Generate a Ruby client from a valid [petstore.yaml](https://petstore3.swagger.io/) doc:
+
+```yaml
+- run: openapi-generator-cli generate -i petstore.yaml -g ruby -o /tmp/test/
 ```
 
 See [action.yml](action.yml)
