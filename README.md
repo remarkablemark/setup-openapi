@@ -4,7 +4,7 @@
 [![test](https://github.com/remarkablemark/setup-openapi/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/setup-openapi/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-⚙️ Set up GitHub Actions workflow with [OpenAPI Generator](https://openapi-generator.tech/docs/installation/).
+🟢 Set up GitHub Actions workflow with [OpenAPI Generator](https://openapi-generator.tech/docs/installation/).
 
 ## Quick Start
 
@@ -37,6 +37,22 @@ Generate a Ruby client from a valid [petstore.yaml](https://petstore3.swagger.io
 ```
 
 See [action.yml](action.yml)
+
+> [!NOTE]
+> On Windows, you'll need to install a higher Java version:
+>
+> ```yaml
+> on: push
+> jobs:
+>   openapi:
+>     runs-on: windows-latest
+>     steps:
+>       - uses: actions/setup-java@v4
+>         with:
+>           distribution: temurin
+>           java-version: 21
+>       - uses: remarkablemark/setup-openapi@v1
+> ```
 
 ## Inputs
 
