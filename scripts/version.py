@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -38,6 +39,12 @@ def get_current_version() -> str:
 def main() -> None:
     current_version = get_current_version()
     latest_version = get_latest_version()
+    github_output = os.environ.get("GITHUB_OUTPUT")
+
+    if github_output:
+        with open(github_output, "a", encoding="utf-8") as file:
+            file.write(f"current_version={current_version}\n")
+            file.write(f"latest_version={latest_version}\n")
 
     action_text = ACTION_FILE.read_text(encoding="utf-8")
     action_text = action_text.replace(
