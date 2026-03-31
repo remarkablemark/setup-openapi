@@ -1,25 +1,72 @@
 name: setup-openapi
-description: Set up GitHub Actions workflow with OpenAPI Generator
+description: Set up GitHub Actions workflow with OpenAPI Generator CLI
 author: remarkablemark
 
 inputs:
   version:
-    description: OpenAPI Generator version
-    required: false
+    description: OpenAPI Generator CLI version
+    default: 7.21.0
 
 runs:
   using: composite
   steps:
-    - name: Install OpenAPI Generator CLI
-      shell: sh
-      run: npm install --global @openapitools/openapi-generator-cli
+    - name: Setup Java
+      uses: actions/setup-java@f2beeb24e141e01a676f977032f5a29d81c9e27e # v5.1.0
+      with:
+        distribution: temurin
+        java-version: 21
 
-    - name: Set OpenAPI Generator Version
-      if: inputs.version
-      shell: sh
-      run: openapi-generator-cli version-manager set $VERSION
+    - name: Set OpenAPI Generator CLI paths
+      id: path
+      shell: bash
+      run: |
+        INSTALL_DIR="${{ runner.tool_cache }}/openapi-generator-cli/$VERSION"
+        mkdir -p "$INSTALL_DIR"
+
+        echo "INSTALL_DIR=$INSTALL_DIR" >> "$GITHUB_OUTPUT"
+        echo "JAR_PATH=$INSTALL_DIR/openapi-generator-cli-$VERSION.jar" >> "$GITHUB_OUTPUT"
       env:
         VERSION: ${{ inputs.version }}
+
+    - name: Cache OpenAPI Generator CLI
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: ${{ steps.path.outputs.INSTALL_DIR }}
+        key: openapi-generator-cli-${{ runner.os }}-${{ inputs.version }}
+
+    - name: Download OpenAPI Generator CLI
+      shell: bash
+      run: |
+        if [[ ! -f "$JAR_PATH" ]]; then
+          curl --silent --show-error --fail --location \
+            "https://repo.maven.apache.org/maven2/org/openapitools/openapi-generator-cli/$VERSION/openapi-generator-cli-$VERSION.jar" \
+            --output "$JAR_PATH"
+        fi
+      env:
+        INSTALL_DIR: ${{ steps.path.outputs.INSTALL_DIR }}
+        JAR_PATH: ${{ steps.path.outputs.JAR_PATH }}
+        VERSION: ${{ inputs.version }}
+
+    - name: Install OpenAPI Generator CLI
+      shell: bash
+      run: |
+        BIN_DIR="$RUNNER_TEMP/openapi-generator-cli-bin"
+        mkdir -p "$BIN_DIR"
+
+        cat > "$BIN_DIR/openapi-generator-cli" <<EOF
+        #!/usr/bin/env bash
+        exec java -jar "$JAR_PATH" "\$@"
+        EOF
+        chmod +x "$BIN_DIR/openapi-generator-cli"
+
+        cat > "$BIN_DIR/openapi-generator-cli.cmd" <<EOF
+        @echo off
+        java -jar "$JAR_PATH" %*
+        EOF
+
+        echo "$BIN_DIR" >> "$GITHUB_PATH"
+      env:
+        JAR_PATH: ${{ steps.path.outputs.JAR_PATH }}
 
 branding:
   icon: check-circle
