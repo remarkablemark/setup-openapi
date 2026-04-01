@@ -6,7 +6,7 @@
 
 🟢 Set up GitHub Actions workflow with [OpenAPI Generator CLI](https://openapi-generator.tech/docs/installation/).
 
-This action installs Java, downloads the OpenAPI Generator CLI JAR, caches it by version, and exposes `openapi-generator-cli` on `PATH`.
+This action installs Java, downloads the OpenAPI Generator CLI JAR, caches it by version, and exposes a binary on `PATH`.
 
 ## Quick Start
 
@@ -50,6 +50,16 @@ See [action.yml](action.yml)
 - uses: remarkablemark/setup-openapi@v1
   with:
     version: 7.21.0
+```
+
+### `name`
+
+**Optional**: The OpenAPI Generator CLI binary name. Defaults to `openapi-generator-cli`.
+
+```yaml
+- uses: remarkablemark/setup-openapi@v1
+  with:
+    name: openapi-generator-cli
 ```
 
 ## License

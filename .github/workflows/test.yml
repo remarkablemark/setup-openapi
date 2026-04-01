@@ -34,3 +34,11 @@ jobs:
             openapi-generator-cli --version
             exit 1
           fi
+
+      - name: Run action with name
+        uses: ./
+        with:
+          name: openapi-generator
+
+      - name: Check name
+        run: openapi-generator version

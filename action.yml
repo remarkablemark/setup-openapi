@@ -6,6 +6,9 @@ inputs:
   version:
     description: OpenAPI Generator CLI version
     default: 7.21.0
+  name:
+    description: OpenAPI Generator CLI name
+    default: openapi-generator-cli
 
 runs:
   using: composite
@@ -53,13 +56,13 @@ runs:
         BIN_DIR="$RUNNER_TEMP/openapi-generator-cli-bin"
         mkdir -p "$BIN_DIR"
 
-        cat > "$BIN_DIR/openapi-generator-cli" <<EOF
+        cat > "$BIN_DIR/$NAME" <<EOF
         #!/usr/bin/env bash
         exec java -jar "$JAR_PATH" "\$@"
         EOF
-        chmod +x "$BIN_DIR/openapi-generator-cli"
+        chmod +x "$BIN_DIR/$NAME"
 
-        cat > "$BIN_DIR/openapi-generator-cli.cmd" <<EOF
+        cat > "$BIN_DIR/$NAME.cmd" <<EOF
         @echo off
         java -jar "$JAR_PATH" %*
         EOF
@@ -67,6 +70,7 @@ runs:
         echo "$BIN_DIR" >> "$GITHUB_PATH"
       env:
         JAR_PATH: ${{ steps.path.outputs.JAR_PATH }}
+        NAME: ${{ inputs.name }}
 
 branding:
   icon: check-circle
