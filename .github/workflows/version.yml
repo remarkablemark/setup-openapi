@@ -1,0 +1,47 @@
+name: version
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Update OpenAPI Generator CLI version
+        id: version
+        run: python3 scripts/version.py
+
+      - name: Configure Git user
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Check for changes
+        if: steps.version.outputs.current_version != steps.version.outputs.latest_version
+        run: |
+          BRANCH="build/version-$LATEST_VERSION"
+          git checkout -B $BRANCH
+
+          git commit -am \
+            "build(deps): bump openapi-generator-cli from $CURRENT_VERSION to $LATEST_VERSION" \
+            -m "Release-As: $(cat version.txt | awk -F. '/[0-9]+\./{$NF++;print}' OFS=.)" \
+            -m "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$LATEST_VERSION/"
+
+          git push --force origin $BRANCH
+
+          if ! gh pr view $BRANCH --json number >/dev/null 2>&1; then
+            gh pr create --assignee remarkablemark --fill --reviewer remarkablemark
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CURRENT_VERSION: ${{ steps.version.outputs.current_version }}
+          LATEST_VERSION: ${{ steps.version.outputs.latest_version }}

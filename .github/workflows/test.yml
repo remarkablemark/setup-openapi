@@ -15,13 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup Java
-        if: matrix.os == 'windows-latest'
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 21
-
       - name: Run action
         uses: ./
 

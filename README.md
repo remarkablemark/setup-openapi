@@ -4,7 +4,9 @@
 [![test](https://github.com/remarkablemark/setup-openapi/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/setup-openapi/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-🟢 Set up GitHub Actions workflow with [OpenAPI Generator](https://openapi-generator.tech/docs/installation/).
+🟢 Set up GitHub Actions workflow with [OpenAPI Generator CLI](https://openapi-generator.tech/docs/installation/).
+
+This action installs Java, downloads the OpenAPI Generator CLI JAR, caches it by version, and exposes `openapi-generator-cli` on `PATH`.
 
 ## Quick Start
 
@@ -30,7 +32,7 @@ Install OpenAPI Generator CLI tool:
 - uses: remarkablemark/setup-openapi@v1
 ```
 
-Generate a Ruby client from a valid [petstore.yaml](https://petstore3.swagger.io/) doc:
+Generate a Ruby client from an [OpenAPI spec](https://petstore3.swagger.io/):
 
 ```yaml
 - run: openapi-generator-cli generate -i petstore.yaml -g ruby -o /tmp/test/
@@ -38,32 +40,16 @@ Generate a Ruby client from a valid [petstore.yaml](https://petstore3.swagger.io
 
 See [action.yml](action.yml)
 
-> [!NOTE]
-> On Windows, you'll need to install a higher Java version:
->
-> ```yaml
-> on: push
-> jobs:
->   openapi:
->     runs-on: windows-latest
->     steps:
->       - uses: actions/setup-java@v4
->         with:
->           distribution: temurin
->           java-version: 21
->       - uses: remarkablemark/setup-openapi@v1
-> ```
-
 ## Inputs
 
 ### `version`
 
-**Optional**: The OpenAPI Generator version. Defaults to latest.
+**Optional**: The OpenAPI Generator CLI version. Defaults to [7.21.0](https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.21.0/).
 
 ```yaml
 - uses: remarkablemark/setup-openapi@v1
   with:
-    version: 7.9.0
+    version: 7.21.0
 ```
 
 ## License
