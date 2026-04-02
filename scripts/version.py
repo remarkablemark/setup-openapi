@@ -50,7 +50,7 @@ def main() -> None:
     action_text = action_text.replace(
         f"default: {current_version}",
         f"default: {latest_version}",
-        count=1,
+        1,
     )
     ACTION_FILE.write_text(action_text, encoding="utf-8")
 
