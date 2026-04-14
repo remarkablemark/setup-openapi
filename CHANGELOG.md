@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/remarkablemark/setup-openapi/compare/v1.1.1...v1.1.2) (2026-04-14)
+
+
+### Build System
+
+* **deps:** bump actions/cache from 5.0.4 to 5.0.5 ([#12](https://github.com/remarkablemark/setup-openapi/issues/12)) ([ce4281a](https://github.com/remarkablemark/setup-openapi/commit/ce4281a93b718556111182670c5c40ae8d889c3e))
+
 ## [1.1.1](https://github.com/remarkablemark/setup-openapi/compare/v1.1.0...v1.1.1) (2026-04-01)
 
 
