@@ -5,7 +5,7 @@ author: remarkablemark
 inputs:
   version:
     description: OpenAPI Generator CLI version
-    default: 7.21.0
+    default: 7.22.0
   name:
     description: OpenAPI Generator CLI name
     default: openapi-generator-cli
