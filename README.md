@@ -44,12 +44,12 @@ See [action.yml](action.yml)
 
 ### `version`
 
-**Optional**: The OpenAPI Generator CLI version. Defaults to [7.22.0](https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.22.0/).
+**Optional**: The OpenAPI Generator CLI version. Defaults to [7.23.0](https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.23.0/).
 
 ```yaml
 - uses: remarkablemark/setup-openapi@v1
   with:
-    version: 7.22.0
+    version: 7.23.0
 ```
 
 ### `name`
