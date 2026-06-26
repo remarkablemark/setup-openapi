@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.7](https://github.com/remarkablemark/setup-openapi/compare/v1.1.6...v1.1.7) (2026-06-26)
+
+
+### Build System
+
+* **deps:** bump actions/setup-java from 5.3.0 to 5.4.0 ([#24](https://github.com/remarkablemark/setup-openapi/issues/24)) ([81271a5](https://github.com/remarkablemark/setup-openapi/commit/81271a5ae4949a20bbc6f558c6e5f0e14f24de58))
+
 ## [1.1.6](https://github.com/remarkablemark/setup-openapi/compare/v1.1.5...v1.1.6) (2026-06-24)
 
 
