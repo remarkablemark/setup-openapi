@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.8](https://github.com/remarkablemark/setup-openapi/compare/v1.1.7...v1.1.8) (2026-06-30)
+
+
+### Build System
+
+* **deps:** bump actions/cache from 6.0.0 to 6.1.0 ([#26](https://github.com/remarkablemark/setup-openapi/issues/26)) ([f0faaf0](https://github.com/remarkablemark/setup-openapi/commit/f0faaf0f08ae7075815a5ad00dc60c1307f94c9c))
+
 ## [1.1.7](https://github.com/remarkablemark/setup-openapi/compare/v1.1.6...v1.1.7) (2026-06-26)
 
 
