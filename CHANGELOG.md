@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.15](https://github.com/remarkablemark/setup-openapi/compare/v1.1.14...v1.1.15) (2026-09-14)
+
+
+### Build System
+
+* **deps:** bump actions/setup-java from 6.0.0 to 6.0.1 ([#40](https://github.com/remarkablemark/setup-openapi/issues/40)) ([dbfd164](https://github.com/remarkablemark/setup-openapi/commit/dbfd1644f9ae98f71c5a99d5483f7da8d502e4ab))
+
 ## [1.1.14](https://github.com/remarkablemark/setup-openapi/compare/v1.1.13...v1.1.14) (2026-08-27)
 
 
