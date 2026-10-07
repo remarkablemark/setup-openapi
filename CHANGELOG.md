@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.16](https://github.com/remarkablemark/setup-openapi/compare/v1.1.15...v1.1.16) (2026-10-07)
+
+
+### Build System
+
+* **deps:** bump openapi-generator-cli from 7.25.0 to 7.26.0 ([#42](https://github.com/remarkablemark/setup-openapi/issues/42)) ([a54c5af](https://github.com/remarkablemark/setup-openapi/commit/a54c5affb6b525da029d45e5d8a45c8018849aef))
+
 ## [1.1.15](https://github.com/remarkablemark/setup-openapi/compare/v1.1.14...v1.1.15) (2026-09-14)
 
 
